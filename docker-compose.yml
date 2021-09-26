@@ -10,6 +10,16 @@ services:
             - "3000:3000"
         depends_on:
             - mongo
+            - mysql
+    mysql:
+        image: mysql:8.0
+        restart: on-failure
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"        
     mongo:
         container_name: mongo
         image: mongo
